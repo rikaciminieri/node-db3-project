@@ -26,7 +26,48 @@ function find() {
     .orderBy("sc.scheme_id", "asc");
 }
 
-function findById(scheme_id) {
+function getSchemeById(scheme_id) {
+  return db("schemes").where("scheme_id", scheme_id).first();
+}
+
+async function findById(scheme_id) {
+  const rows = await db("schemes as sc")
+    .leftJoin("steps as st", "sc.scheme_id", "st.scheme_id")
+    .select("sc.scheme_name", "st.*")
+    .where("sc.scheme_id", scheme_id)
+    .orderBy("st.step_number", "asc");
+  // {
+  //   "scheme_id": 1,
+  //   "scheme_name": "World Domination",
+  //   "steps": [
+  //     {
+  //       "step_id": 2,
+  //       "step_number": 1,
+  //       "instructions": "solve prime number theory"
+  //     },
+  //     {
+  //       "step_id": 1,
+  //       "step_number": 2,
+  //       "instructions": "crack cyber security"
+  //     },
+  //     // etc
+  //   ]
+  // }
+
+  result = {
+    scheme_id: rows[0].scheme_id,
+    scheme_name: rows[0].scheme_name,
+    steps: rows[0].step_id
+      ? rows.map((row) => ({
+          step_id: row.step_id,
+          step_number: row.step_number,
+          instructions: row.instructions,
+        }))
+      : [],
+  };
+  console.log(rows)
+  return result;
+
   // EXERCISE B
   /*
     1B- Study the SQL query below running it in SQLite Studio against `data/schemes.db3`:
@@ -138,6 +179,7 @@ function addStep(scheme_id, step) {
 module.exports = {
   find,
   findById,
+  getSchemeById,
   findSteps,
   add,
   addStep,
