@@ -8,9 +8,9 @@ on c.id = p.categoryid
 -- Display the order Id and shipper CompanyName for all orders placed before August 9 2012. Shows 429 records.
 select o.id, s.companyname
 from `Order` as o
-left join shipper as s
+join shipper as s
 on o.shipvia = s.id
-where o.orderdate < 2012-08-09 
+where o.orderdate < '2012-08-09 00:00:00.000'
 
 --NOT FINISHED
 
