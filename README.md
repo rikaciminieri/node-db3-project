@@ -24,18 +24,18 @@ Open `api/schemes/scheme-router.js` and study the specification for each endpoin
 
 Write middleware functions in `api/schemes/scheme-middleware.js` following the instructions inside that file:
 
-- [ ] `checkSchemeId`
-- [ ] `validateScheme`
-- [ ] `validateStep`
+- [X] `checkSchemeId`
+- [X] `validateScheme`
+- [X] `validateStep`
 
 ### Database Functions
 
 Write db access functions in `api/schemes/scheme-model.js` following the instructions inside that file:
 
-- [ ] `find`
-- [ ] `findById`
-- [ ] `findSteps`
-- [ ] `add`
+- [X] `find`
+- [X] `findById`
+- [X] `findSteps`
+- [X] `add`
 - [ ] `addStep`
 
 #### Schemes Schema
